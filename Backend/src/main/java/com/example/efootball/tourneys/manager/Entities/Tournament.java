@@ -1,4 +1,5 @@
 package com.example.efootball.tourneys.manager.Entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class Tournament {
 
     // Association 1 : one Tourney to many teams
     @OneToMany(cascade=CascadeType.ALL, mappedBy="tourney" , fetch=FetchType.EAGER)
+    @JsonIgnore
     private List<Team> teams= new ArrayList<>();
 
 }

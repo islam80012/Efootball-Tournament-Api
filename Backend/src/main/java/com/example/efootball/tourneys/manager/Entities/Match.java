@@ -1,4 +1,5 @@
 package com.example.efootball.tourneys.manager.Entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,10 +21,12 @@ public class Match {
     // Association 1 Many matches to one team  X 2 (home & away)
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="hometeam_id")
+    @JsonIgnore
     private Team hometeam;
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="awayteam_id")
+    @JsonIgnore
     private Team awayteam;
 
     // Association 2  one Match	to many PlayerMatchStat

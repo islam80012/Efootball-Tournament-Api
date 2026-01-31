@@ -46,11 +46,11 @@ public class EffootballTourneyManagementApplication implements CommandLineRunner
 		worldCup.setTeams(new ArrayList<>()); // Ensure it's not null
 		tournamentRepo.save(worldCup);
 
-		// 2. Create Teams and MANUALLY add to the tournament list
+		// 2. Create Teams
 		Team teamA = new Team(null, "FC Barcelona", 11, worldCup, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 		Team teamB = new Team(null, "Real Madrid", 11, worldCup, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
-		// This part is crucial for the in-memory check to work!
+
 		worldCup.getTeams().add(teamA);
 		worldCup.getTeams().add(teamB);
 
@@ -60,7 +60,6 @@ public class EffootballTourneyManagementApplication implements CommandLineRunner
 		logger.info("--- Fetching Tournament Data ---");
 		tournamentRepo.findById(worldCup.getId()).ifPresent(t -> {
 			logger.info("Tournament: {}", t.getName());
-			// Now t.getTeams() won't be null
 			if (t.getTeams() != null) {
 				logger.info("Number of teams enrolled: {}", t.getTeams().size());
 				t.getTeams().forEach(team -> logger.info("Enrolled Team: {}", team.getName()));
