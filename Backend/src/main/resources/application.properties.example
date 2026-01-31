@@ -1,0 +1,11 @@
+spring.application.name=Effootball-Tourney-Management
+# Connection Settings
+spring.datasource.url=jdbc:postgresql://localhost:5432/your_db_name
+spring.datasource.username=YOUR-USERNAME-HERE
+spring.datasource.password=YOUR-POSTGRESS-PASSWORD-HERE
+
+# JPA / Hibernate Settings
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
