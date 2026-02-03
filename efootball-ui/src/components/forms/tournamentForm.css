@@ -1,0 +1,44 @@
+/*=== create tournament style ==== */
+.tournament-form-box {
+
+  max-width: 500px;
+  margin: 40px auto; 
+  padding: 30px;
+  background-color: #ffffff; 
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); 
+  display: flex;
+  flex-direction: column;
+  gap: 10px
+}
+
+
+.tournament-form-box button {
+  margin-top: 20px;
+  padding: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
+.tournament-form-box .MuiInputLabel-root.Mui-focused {
+  color: #184165;
+}
+
+/*=== search tournament style ==== */
+.search-form-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensures the text field and button are the same height */
+.search-form-container .MuiStack-root {
+    align-items: stretch;
+}
+
+.search-form-container button {
+    min-width: 120px;
+}
