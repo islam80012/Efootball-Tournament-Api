@@ -1,5 +1,5 @@
 /*=== create tournament style ==== */
-.tournament-form-box {
+.tournament-form-box, .Saison-form-box {
 
   max-width: 500px;
   margin: 40px auto; 
@@ -12,7 +12,7 @@
 }
 
 
-.tournament-form-box button {
+.tournament-form-box button ,.Saison-form-box button {
   margin-top: 20px;
   padding: 12px;
   font-weight: bold;
@@ -20,12 +20,12 @@
 }
 
 
-.tournament-form-box .MuiInputLabel-root.Mui-focused {
+.tournament-form-box .MuiInputLabel-root.Mui-focused, .Saison-form-box .MuiInputLabel-root.Mui-focused {
   color: #184165;
 }
 
 /*=== search tournament style ==== */
-.search-form-container {
+.join-form-container {
     max-width: 800px;
     margin: 20px auto;
     padding: 10px;
@@ -35,10 +35,10 @@
 }
 
 /* Ensures the text field and button are the same height */
-.search-form-container .MuiStack-root {
+.join-form-container .MuiStack-root {
     align-items: stretch;
 }
 
-.search-form-container button {
+.join-form-container button {
     min-width: 120px;
 }

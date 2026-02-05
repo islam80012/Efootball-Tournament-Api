@@ -4,8 +4,9 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Routes, Route,Link,useLocation} from 'react-router-dom';
-import CreateTournamentForm from './components/forms/createTournamet';
-import SearchTournamentForm from './components/forms/SearchTournament';
+import CreateTournamentForm from './components/forms/createTournament';
+import JoinTournamentForm from './components/forms/JoinTournament';
+import CreateSaisonFrom from './components/forms/createSaison';
 // import Header from './components/Header';
 // import Tournament from './components/Tournament';
 // import Stats from './components/Stats';
@@ -41,12 +42,13 @@ function App() {
           <div className="tournament-container">
 
             <ActionButton variant="contained" 
-            onClick={() => setList(!list)}>Tournament
+            onClick={() => setList(!list)}>Saison
             </ActionButton>
             {list && (
             <Stack className="sub-menu-stack">
-              <ActionButton as={Link} to="/create" >Create Tournament</ActionButton>
-              <ActionButton as={Link} to="/search" >Join Tournament</ActionButton>
+              <ActionButton as={Link} to="/createSaison" >Create New Saison</ActionButton>
+              <ActionButton as={Link} to="/createTournament" >Create New Tournament</ActionButton>
+              <ActionButton as={Link} to="/joinTournament" >Join Tournament</ActionButton>
             </Stack>
             )}
           </div>
@@ -57,8 +59,9 @@ function App() {
           {location.pathname !== '/' && (
           <div className="form-area">
             <Routes>
-              <Route path="/create" element={<CreateTournamentForm />} />
-              <Route path="/search" element={<SearchTournamentForm />} />
+              <Route path="/createSaison" element={<CreateSaisonFrom />} />
+              <Route path="/createTournament" element={<CreateTournamentForm />} />
+              <Route path="/joinTournament" element={<JoinTournamentForm />} />
             </Routes>
           </div>)}
 

@@ -18,7 +18,7 @@ public class Tournament {
     private Long id;
     private String name ;
     private int maxsTeams, playersPerTeam;
-    private Date startDate;
+    private Date tournamentStartDate;
     @Enumerated(EnumType.STRING)
     private AppEnum.Status status;
 
@@ -26,5 +26,11 @@ public class Tournament {
     @OneToMany(cascade=CascadeType.ALL, mappedBy="tourney" , fetch=FetchType.EAGER)
     @JsonIgnore
     private List<Team> teams= new ArrayList<>();
+
+    // Association 2 : many tournaments to one saison
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="saison_id")
+    private Saison saison;
+
 
 }
