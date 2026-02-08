@@ -11,8 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.time.LocalDate;
+
 
 @SpringBootApplication
 @RequiredArgsConstructor // Cleaner way to inject final repositories
@@ -26,6 +27,7 @@ public class EffootballTourneyManagementApplication implements CommandLineRunner
 	private final RegistrationRepo registrationRepo;
 	private final MatchRepo matchRepo;
 	private final PlayerMatchStatsRepo statsRepo;
+	private final SaisonRepo saisonRepo ;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EffootballTourneyManagementApplication.class, args);
@@ -34,19 +36,26 @@ public class EffootballTourneyManagementApplication implements CommandLineRunner
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
-		if (tournamentRepo.count() > 0) {
+		if (saisonRepo.count() > 0 ) {
 			logger.info("Database already populated. Skipping initialization.");
 			return;
 		}
 		logger.info("--- Starting Database Initialization ---");
+		//1. Create Saison
+		Saison saison1 = new Saison();
+		saison1.setName("Saison Number one ");
+		saison1.setSaisonStartDate(LocalDate.now());
+		saison1.setStatus(AppEnum.Status.OPEN);
+		saisonRepo.save(saison1);
 
-		// 1. Create Tournament
+		// 2. Create Tournament
 		Tournament worldCup = new Tournament();
 		worldCup.setName("eFootball World Cup 2026");
-		worldCup.setTeams(new ArrayList<>()); // Ensure it's not null
+		worldCup.setTeams(new ArrayList<>());
+		worldCup.setSaison(saison1);
 		tournamentRepo.save(worldCup);
 
-		// 2. Create Teams
+		// 3. Create Teams
 		Team teamA = new Team(null, "FC Barcelona", 11, worldCup, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 		Team teamB = new Team(null, "Real Madrid", 11, worldCup, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
@@ -56,6 +65,7 @@ public class EffootballTourneyManagementApplication implements CommandLineRunner
 
 		teamRepo.saveAll(List.of(teamA, teamB));
 
+
 		// 3. Verification
 		logger.info("--- Fetching Tournament Data ---");
 		tournamentRepo.findById(worldCup.getId()).ifPresent(t -> {
@@ -63,6 +73,7 @@ public class EffootballTourneyManagementApplication implements CommandLineRunner
 			if (t.getTeams() != null) {
 				logger.info("Number of teams enrolled: {}", t.getTeams().size());
 				t.getTeams().forEach(team -> logger.info("Enrolled Team: {}", team.getName()));
+				logger.info("Tournament: {} is part of {}", t.getName(), t.getSaison().getName());
 			}
 		});
 	}

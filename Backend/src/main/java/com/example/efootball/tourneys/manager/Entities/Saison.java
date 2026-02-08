@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,8 +17,10 @@ public class Saison {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(unique = true)
     private String name;
-    private Date saisonStartDate;
+    private LocalDate saisonStartDate;
     @Enumerated(EnumType.STRING)
     private AppEnum.Status status;
 

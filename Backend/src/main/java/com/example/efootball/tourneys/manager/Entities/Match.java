@@ -5,8 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -15,7 +14,7 @@ public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Date matchDate;
+    private LocalDate matchDate;
     private int scoreHome, scoreAway;
 
     // Association 1 Many matches to one team  X 2 (home & away)

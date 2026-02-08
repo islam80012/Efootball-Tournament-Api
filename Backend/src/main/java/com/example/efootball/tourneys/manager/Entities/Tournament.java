@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,7 +18,7 @@ public class Tournament {
     private Long id;
     private String name ;
     private int maxsTeams, playersPerTeam;
-    private Date tournamentStartDate;
+    private LocalDate tournamentStartDate;
     @Enumerated(EnumType.STRING)
     private AppEnum.Status status;
 
