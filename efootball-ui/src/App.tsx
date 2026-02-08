@@ -7,11 +7,14 @@ import { Routes, Route,Link,useLocation} from 'react-router-dom';
 import CreateTournamentForm from './components/forms/createTournament';
 import JoinTournamentForm from './components/forms/JoinTournament';
 import CreateSaisonFrom from './components/forms/createSaison';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 // import Header from './components/Header';
 // import Tournament from './components/Tournament';
 // import Stats from './components/Stats';
 // import Footer from './components/Footer';
 
+const queryClient = new QueryClient();
 
 const ActionButton = styled(Button)<{ component?: React.ElementType; to?: string }>({
   backgroundColor: '#eeeeeec5', // Football green
@@ -37,6 +40,7 @@ function App() {
   
 
   return (
+    <QueryClientProvider client={queryClient}>
     
       <div className="main-container">
           <div className="tournament-container">
@@ -65,7 +69,10 @@ function App() {
             </Routes>
           </div>)}
 
+        
       </div>
+        
+          </QueryClientProvider>
  
 )}
 
