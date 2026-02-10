@@ -8,6 +8,8 @@ import CreateTournamentForm from './components/forms/createTournament';
 import JoinTournamentForm from './components/forms/JoinTournament';
 import CreateSaisonFrom from './components/forms/createSaison';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import SaisonList from './components/SaisonComponents/saisonList';
+import SaisonDetails from './components/SaisonComponents/saisonDetails';
 
 // import Header from './components/Header';
 // import Tournament from './components/Tournament';
@@ -66,6 +68,8 @@ function App() {
               <Route path="/createSaison" element={<CreateSaisonFrom />} />
               <Route path="/createTournament" element={<CreateTournamentForm />} />
               <Route path="/joinTournament" element={<JoinTournamentForm />} />
+              <Route path="/saisonList" element={<SaisonList />} />
+              <Route path="/saisonDetails/:id" element={<SaisonDetails />} />
             </Routes>
           </div>)}
 

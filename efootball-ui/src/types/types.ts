@@ -2,6 +2,7 @@ export interface Saison {
     name: string;
     saisonStartDate: string;
     status: string;
+    id: number;
     _links: {
         self: { href: string };
         saison: { href: string };

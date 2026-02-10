@@ -1,0 +1,70 @@
+.list-container, .saison-details-container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list-title, .saison-details-title {
+    text-align: center;
+    font-weight: 700 !important;
+    letter-spacing: 1px;
+    color: #ffffff; 
+    text-transform: uppercase;
+    margin-bottom: 20px !important;
+}
+
+.saison-list-wrapper {
+    background-color: rgba(27, 4, 69, 0.1) !important; 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); 
+    width: 100%;
+    border-radius: 15px !important;
+    overflow: hidden;
+    padding: 10px !important;
+}
+
+.saison-list-item, .saison-details {
+    background-color: #ffffff !important;
+    margin-bottom: 8px !important;
+    border-radius: 10px !important;
+    border: none !important; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 15px !important;
+}
+
+.saison-list-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(87, 70, 174, 0.2);
+    background-color: #a1a8b7 !important;
+    cursor: pointer;
+}
+
+.saison-name {
+    font-weight: 800 !important;
+    color: #1a237e !important; 
+    min-width: 140px;
+}
+
+.saison-dates {
+    color: #3a3838 !important;
+    font-style: italic;
+}
+
+.saison-status {
+    font-weight: bold !important;
+    color: #2e7d32 !important; 
+    text-align: right;
+}
+.add-saison-button, .back-button, .add-tournament-button {
+    background-color: #4caf50 !important; 
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  
+}
+
+.add-tournament-button, .back-button {
+     margin-top:20px !important;
+}

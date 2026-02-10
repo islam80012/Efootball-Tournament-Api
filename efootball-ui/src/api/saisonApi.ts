@@ -11,3 +11,8 @@ export const addSaison = async (newSaison: Omit<Saison, '_links'>): Promise<Sais
     const response = await axios.post('http://localhost:8080/api/saisons', newSaison);
     return response.data;
 };
+
+export const getSaisonById = async (saisonId:number):Promise<Saison> => {
+    const response = await axios.get(`http://localhost:8080/api/saisons/${saisonId}`);
+    return response.data;
+}
