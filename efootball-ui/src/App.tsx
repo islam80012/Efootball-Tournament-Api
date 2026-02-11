@@ -53,7 +53,7 @@ function App() {
             {list && (
             <Stack className="sub-menu-stack">
               <ActionButton as={Link} to="/createSaison" >Create New Saison</ActionButton>
-              <ActionButton as={Link} to="/createTournament" >Create New Tournament</ActionButton>
+              {/* <ActionButton as={Link} to="/createTournament" >Create New Tournament</ActionButton> */}
               <ActionButton as={Link} to="/joinTournament" >Join Tournament</ActionButton>
             </Stack>
             )}
@@ -66,7 +66,7 @@ function App() {
           <div className="form-area">
             <Routes>
               <Route path="/createSaison" element={<CreateSaisonFrom />} />
-              <Route path="/createTournament" element={<CreateTournamentForm />} />
+              <Route path="/createTournament/:id" element={<CreateTournamentForm />} />
               <Route path="/joinTournament" element={<JoinTournamentForm />} />
               <Route path="/saisonList" element={<SaisonList />} />
               <Route path="/saisonDetails/:id" element={<SaisonDetails />} />
