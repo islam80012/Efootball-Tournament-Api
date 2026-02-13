@@ -76,10 +76,14 @@ export default function SaisonDetails() {
                         primary={tourney.status} 
                         primaryTypographyProps={{ className: 'tournament-status' }} 
                         />
+                        <ListItemText 
+                        primary={tourney.tourneyType} 
+                        primaryTypographyProps={{ className: 'tournament-type' }} 
+                         />
                     </Box>
                 </ListItem>
                 ))}
-                <ListItem className="tournament-list-item" component="li">
+                <ListItem  className="tournament-list-item" component="li">
                    <Button className="add-tournament-button" variant="contained" fullWidth 
                      onClick={() => navigate(`/createTournament/${saisondata?.id}`)} >Add new tournament</Button>
                 </ListItem>

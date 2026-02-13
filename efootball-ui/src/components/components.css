@@ -1,11 +1,11 @@
-.list-container, .saison-details-container {
+.list-container, .saison-details-container,.tournament-details-container {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.list-title, .saison-details-title,.tournament-list-title {
+.list-title, .saison-details-title,.tournament-list-title ,.tournament-details-title,.Teams-details-title {
     text-align: center;
     font-weight: 700 !important;
     letter-spacing: 1px;
@@ -14,7 +14,7 @@
     margin-bottom: 20px !important;
 }
 
-.saison-list-wrappe,.tournaments-wrappe {
+.saison-list-wrappe,.tournaments-wrappe,.teams-wrapper {
     background-color: rgba(27, 4, 69, 0.1) !important; 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px); 
@@ -24,7 +24,7 @@
     padding: 10px !important;
 }
 
-.saison-list-item, .saison-details,.tournament-list-item {
+.saison-list-item, .saison-details,.tournament-list-item, .tournament-details,.team-list-item {
     background-color: #ffffff !important;
     margin-bottom: 8px !important;
     border-radius: 10px !important;
@@ -40,13 +40,13 @@
     cursor: pointer;
 }
 
-.saison-name,.tourament-name {
+.saison-name,.tournament-name,.team-id {
     font-weight: 800 !important;
     color: #1a237e !important; 
     min-width: 140px;
 }
 
-.saison-dates,.tournament-dates,.tournament-Nteams,.tournament-NplayersPerTeam {
+.saison-dates,.tournament-dates,.tournament-Nteams,.tournament-NplayersPerTeam,.team-name,.team-capacity {
     color: #3a3838 !important;
     font-style: italic;
 }

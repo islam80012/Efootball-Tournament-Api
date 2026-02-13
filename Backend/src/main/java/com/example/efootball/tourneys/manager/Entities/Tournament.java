@@ -21,6 +21,8 @@ public class Tournament {
     private LocalDate tournamentStartDate;
     @Enumerated(EnumType.STRING)
     private AppEnum.Status status;
+    @Enumerated (EnumType.STRING)
+    private AppEnum.tourneyType tourneyType;
 
     // Association 1 : one Tourney to many teams
     @OneToMany(cascade=CascadeType.ALL, mappedBy="tourney" , fetch=FetchType.EAGER)

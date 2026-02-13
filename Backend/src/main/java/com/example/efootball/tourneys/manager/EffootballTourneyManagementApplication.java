@@ -53,6 +53,9 @@ public class EffootballTourneyManagementApplication implements CommandLineRunner
 		worldCup.setName("eFootball World Cup 2026");
 		worldCup.setTeams(new ArrayList<>());
 		worldCup.setSaison(saison1);
+		worldCup.setMaxsTeams(20);
+		worldCup.setPlayersPerTeam(3);
+		worldCup.setTourneyType(AppEnum.tourneyType.LEAGUE);
 		tournamentRepo.save(worldCup);
 
 		// 3. Create Teams

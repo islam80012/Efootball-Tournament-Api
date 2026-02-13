@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import  {Box,TextField}  from '@mui/material';
+import  {Box,TextField,MenuItem}  from '@mui/material';
 import {useNavigate,useParams} from 'react-router-dom';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -18,6 +18,7 @@ const [name, setName] = useState('');
 const [teamsNumber, setTeamsNumber] = useState(0);
 const [playersPerTeam, setPlayersPerTeam] = useState(0);
 const [startDate, setStartDate] = useState('');
+const [tourneyType, setTourneyType] = useState(''); // Add state for tourneyType
 // saisonId
 const { id } = useParams();
 
@@ -41,6 +42,7 @@ const handleSubmit = (e: React.FormEvent) => {
       maxsTeams: teamsNumber,
       playersPerTeam: playersPerTeam,
       tournamentStartDate: startDate,
+      tourneyType: tourneyType, // Include tourneyType in the mutation
       status: "OPEN",
       saison: `http://localhost:8080/api/saisons/${id}`
     } as Omit<Tournament, '_links'>
@@ -62,7 +64,11 @@ const handleSubmit = (e: React.FormEvent) => {
               helperText={isError ? "Please check this field" : ""}  />
           
             <TextField label="Start Date" type="date" fullWidth margin="normal"InputLabelProps={{ shrink: true }} value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-    
+           
+            <TextField select label="Tournament Type" type="text" fullWidth margin="normal" required value={tourneyType} onChange={(e) => setTourneyType(e.target.value)} >
+                <MenuItem value="UCL">UCL</MenuItem>
+                <MenuItem value="LEAGUE">League</MenuItem>
+            </TextField>
 
             <Button color="primary" type="submit" disabled={isPending}>
                     {isPending ? 'Saving...' : 'Create Tournament'}

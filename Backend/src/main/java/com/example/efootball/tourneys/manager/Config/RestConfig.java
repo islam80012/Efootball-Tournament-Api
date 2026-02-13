@@ -17,6 +17,7 @@ public class RestConfig implements RepositoryRestConfigurer {
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
 
         // show the IDs for React app to use.
-        config.exposeIdsFor(Team.class, Player.class, Registration.class,Saison.class);
+        config.exposeIdsFor(Team.class, Player.class, Registration.class,Saison.class,Tournament.class);
     }
+    
 }

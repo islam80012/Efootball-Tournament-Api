@@ -15,7 +15,9 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private int Capacite;
+    private int capacite;
+
+
     // Associations 1 : many Teams to one  Tournament
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="tourney_id")

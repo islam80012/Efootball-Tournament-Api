@@ -1,6 +1,6 @@
 package com.example.efootball.tourneys.manager.Entities;
 
-// Use 'class' here, not 'enum'
+
 public class AppEnum {
 
     public enum Role {
@@ -10,4 +10,9 @@ public class AppEnum {
     public enum Status {
         OPEN, IN_PROGRESS, FINISHED
     }
+
+    public enum tourneyType {
+         UCL,LEAGUE
+    }
+
 }
