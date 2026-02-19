@@ -33,6 +33,7 @@ public class EffootballTourneyManagementApplication implements CommandLineRunner
 		SpringApplication.run(EffootballTourneyManagementApplication.class, args);
 	}
 
+
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
@@ -62,14 +63,36 @@ public class EffootballTourneyManagementApplication implements CommandLineRunner
 		Team teamA = new Team(null, "FC Barcelona", 11, worldCup, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 		Team teamB = new Team(null, "Real Madrid", 11, worldCup, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
-
 		worldCup.getTeams().add(teamA);
 		worldCup.getTeams().add(teamB);
 
 		teamRepo.saveAll(List.of(teamA, teamB));
 
+		//4. Create Player
+		Player player1 = new Player(null,"islam_0015","islamovic",new ArrayList<>(), new ArrayList<>());
+		Player player2 = new Player(null,"wassimAch","messi",new ArrayList<>(), new ArrayList<>());
 
-		// 3. Verification
+		//5. Adding the two players to registarions
+
+		Registration worldCupRegistration1 = new Registration(null,AppEnum.Role.CAPTAIN,teamA,player1);
+		Registration worldCupRegistration2 = new Registration(null,AppEnum.Role.MEMBER,teamA,player2);
+
+		//6. adding the registrations to the specific players
+		player1.getRegistrations().add(worldCupRegistration1);
+		player2.getRegistrations().add(worldCupRegistration2);
+		playerRepo.saveAll(List.of(player1, player2));
+
+
+		registrationRepo.saveAll(List.of(worldCupRegistration1, worldCupRegistration2));
+
+		//7. adding the registrations to the teamA
+		teamA.getRegistrations().add(worldCupRegistration1);
+		teamA.getRegistrations().add(worldCupRegistration2);
+
+
+
+
+		// 8. Verification
 		logger.info("--- Fetching Tournament Data ---");
 		tournamentRepo.findById(worldCup.getId()).ifPresent(t -> {
 			logger.info("Tournament: {}", t.getName());

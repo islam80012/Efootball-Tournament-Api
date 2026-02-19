@@ -10,7 +10,7 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String disordname,pseudonyme;
+    private String discordname,pseudonyme;
 
    // Association 1  :one Player to many Registration
     @OneToMany (cascade=CascadeType.ALL, mappedBy="player" , fetch=FetchType.LAZY)

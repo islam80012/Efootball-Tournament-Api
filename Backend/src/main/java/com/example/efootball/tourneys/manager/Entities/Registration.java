@@ -24,7 +24,6 @@ public class Registration {
     // Association 2 : many registration to one player
     @ManyToOne
     @JoinColumn (name="player_id")
-    @JsonIgnore
     private Player player;
 
 }

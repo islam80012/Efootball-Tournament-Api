@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type{ SaisonResponse,Saison,TournamentResponse,Tournament, Team } from '../types/types';
+import type{ SaisonResponse,Saison,TournamentResponse,Tournament, Team}from '../types/types';
 
 // ================ Saison API functions ================
 export const getSaisons = async (): Promise<SaisonResponse> => {
@@ -54,3 +54,22 @@ export const addTeamToTournament = async (newTeam: Omit<Team, '_links'>): Promis
     const response = await axios.post(`http://localhost:8080/api/teams`, newTeam);
     return response.data;
 }
+
+// ================ Player API functions ================
+
+// export const getPlayersByProjection = async (teamId: number): Promise<Team> => {
+//     const response = await axios.get(`http://localhost:8080/api/teams/${teamId}?projection=withPlayers`);
+//     return response.data ;
+// }
+
+export const getRegistrationsByTeam = async (teamId: number) => {
+    const response = await axios.get(`http://localhost:8080/api/teams/${teamId}/registrations`);
+    return response.data._embedded.registrations; 
+};
+
+
+export const fetchByLink = async (link: string) => {
+    const response = await axios.get(link);
+    return response.data;
+};
+

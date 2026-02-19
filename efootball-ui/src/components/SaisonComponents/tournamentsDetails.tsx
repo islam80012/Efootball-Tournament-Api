@@ -40,7 +40,7 @@ export default function TournamentDetails(){
             <Typography variant="h4" className="tournament-details-title">{tourneyData?.name} : {tourneyData?.maxsTeams} Teams ({tourneyData?.playersPerTeam} Players per team)</Typography>
             <Typography variant="h5" className="Teams-details-title">Teams in Tournament</Typography>
             {teamsLoading && <div>Loading Teams...</div>}
-         {/* {teamsError && <div>Error loading teams</div>} */}
+            {/* {teamsError && <div>Error loading teams</div>} */}
            {teamsData && teamsData.length > 0 ? (
                <List component={Paper} elevation={4} className="teams-wrapper" > 
                {teamsData.map((team: Team) => (
