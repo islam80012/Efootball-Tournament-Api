@@ -60,8 +60,8 @@ public class EffootballTourneyManagementApplication implements CommandLineRunner
 		tournamentRepo.save(worldCup);
 
 		// 3. Create Teams
-		Team teamA = new Team(null, "FC Barcelona", 11, worldCup, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-		Team teamB = new Team(null, "Real Madrid", 11, worldCup, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+		Team teamA = new Team(null, "FC Barcelona", 4, worldCup, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+		Team teamB = new Team(null, "Real Madrid", 3, worldCup, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
 		worldCup.getTeams().add(teamA);
 		worldCup.getTeams().add(teamB);

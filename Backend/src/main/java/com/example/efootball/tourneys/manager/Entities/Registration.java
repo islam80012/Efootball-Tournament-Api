@@ -18,7 +18,6 @@ public class Registration {
     //Asscociation 1 : many Registration to one team
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="team_id")
-    @JsonIgnore
     private Team team;
 
     // Association 2 : many registration to one player

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type{ SaisonResponse,Saison,TournamentResponse,Tournament, Team}from '../types/types';
+import type{ SaisonResponse,Saison,TournamentResponse,Tournament, Team,Player}from '../types/types';
 
 // ================ Saison API functions ================
 export const getSaisons = async (): Promise<SaisonResponse> => {
@@ -54,13 +54,12 @@ export const addTeamToTournament = async (newTeam: Omit<Team, '_links'>): Promis
     const response = await axios.post(`http://localhost:8080/api/teams`, newTeam);
     return response.data;
 }
+export const getTeamById = async (teamId: number): Promise<Team> => {
+    const response = await axios.get(`http://localhost:8080/api/teams/${teamId}`);
+    return response.data;
+}
 
 // ================ Player API functions ================
-
-// export const getPlayersByProjection = async (teamId: number): Promise<Team> => {
-//     const response = await axios.get(`http://localhost:8080/api/teams/${teamId}?projection=withPlayers`);
-//     return response.data ;
-// }
 
 export const getRegistrationsByTeam = async (teamId: number) => {
     const response = await axios.get(`http://localhost:8080/api/teams/${teamId}/registrations`);
@@ -72,4 +71,35 @@ export const fetchByLink = async (link: string) => {
     const response = await axios.get(link);
     return response.data;
 };
+
+
+
+export const addPlayerToTeam = async ({ player, teamId, role }: { 
+    player: Omit<Player, 'id' | '_links'>, 
+    teamId: string, 
+    role: string 
+}) => {
+    // 1. Create the Player first
+    const playerResponse = await axios.post('http://localhost:8080/api/players', player);
+    
+    // This is the link to the player we just made (e.g., http://localhost:8080/api/players/5)
+    const playerUrl = playerResponse.data._links.self.href;
+
+    // 2. Create the Registration and LINK them using URIs
+    const registrationData = {
+        role: role,
+        // IMPORTANT: Spring Data REST uses these URIs to set the Foreign Keys
+        player: playerUrl, 
+        team: `http://localhost:8080/api/teams/${teamId}` 
+    };
+
+    return axios.post('http://localhost:8080/api/registrations', registrationData);
+};
+
+//=============== Registration API functions ================
+ export const getTeamRegistrations = async (teamId: number) => {
+    const response = await axios.get(`http://localhost:8080/api/teams/${teamId}/registrations`);
+    return response.data._embedded.registrations; // This is the array
+};
+
 
