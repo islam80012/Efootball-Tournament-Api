@@ -1,4 +1,8 @@
-.list-container, .saison-details-container,.tournament-details-container,.teams-details-container {
+.list-container,
+ .saison-details-container,
+ .tournament-details-container,
+ .teams-details-container ,
+ .buttons-container{
     margin-top: 40px;
     display: flex;
     flex-direction: column;
@@ -56,7 +60,7 @@
     color: #2e7d32 !important; 
     text-align: right;
 }
-.add-saison-button, .back-button, .add-tournament-button,.add-player-button {
+.add-saison-button, .back-button, .add-tournament-button,.add-player-button,.generate-bracket-button {
     background-color: #4caf50 !important; 
     color: #ffffff !important;
     font-weight: 600 !important;

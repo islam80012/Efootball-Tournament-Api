@@ -34,5 +34,7 @@ public class Tournament {
     @JoinColumn(name="saison_id")
     private Saison saison;
 
-
+    // Association 3 : one Tournament to many matches
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tourney",fetch=FetchType.EAGER)
+    private List<Match> matches= new ArrayList<>();
 }

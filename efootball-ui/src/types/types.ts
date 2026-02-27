@@ -131,5 +131,37 @@ export interface RegistrationResponse {
     };
 }
 
+// Match Types
+export interface Match {
+    id: number;
+    matchDate: string;
+    scoreHome: number;
+    scoreAway: number;
+    homeTeam?: string;
+    awayTeam?: string;
+    roundNumber: number;
+    _links: {
+        self: { href: string };
+        match: { href: string };
+        homeTeam: { href: string };
+        awayTeam: { href: string };
+    };
+}
+export interface MatchResponse {
+    "_embedded": {
+        "matches": Match[];
+    };
+    "_links": {
+        "self": {
+            "href": string;
+        };
+        "profile": {
+            "href": string;
+        };
+
+    };
+}
+
+
 
     

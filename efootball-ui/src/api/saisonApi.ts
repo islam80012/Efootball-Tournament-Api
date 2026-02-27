@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type{ SaisonResponse,Saison,TournamentResponse,Tournament, Team,Player}from '../types/types';
+import type{ SaisonResponse,Saison,TournamentResponse,Tournament, Team,Player,Match}from '../types/types';
 
 // ================ Saison API functions ================
 export const getSaisons = async (): Promise<SaisonResponse> => {
@@ -79,16 +79,11 @@ export const addPlayerToTeam = async ({ player, teamId, role }: {
     teamId: string, 
     role: string 
 }) => {
-    // 1. Create the Player first
     const playerResponse = await axios.post('http://localhost:8080/api/players', player);
-    
-    // This is the link to the player we just made (e.g., http://localhost:8080/api/players/5)
     const playerUrl = playerResponse.data._links.self.href;
 
-    // 2. Create the Registration and LINK them using URIs
     const registrationData = {
         role: role,
-        // IMPORTANT: Spring Data REST uses these URIs to set the Foreign Keys
         player: playerUrl, 
         team: `http://localhost:8080/api/teams/${teamId}` 
     };
@@ -101,5 +96,16 @@ export const addPlayerToTeam = async ({ player, teamId, role }: {
     const response = await axios.get(`http://localhost:8080/api/teams/${teamId}/registrations`);
     return response.data._embedded.registrations; // This is the array
 };
+
+// ================ Match API functions ================
+export const addMatches = async (matches: Match[]) => {
+    const response = await axios.post('http://localhost:8080/api/matches', matches);
+    return response.data;
+}
+export const createMatch = async (matchData: Omit<Match, 'id' | '_links'>) => {
+    const response = await axios.post('http://localhost:8080/api/matches', matchData);
+    return response.data;
+}
+
 
 

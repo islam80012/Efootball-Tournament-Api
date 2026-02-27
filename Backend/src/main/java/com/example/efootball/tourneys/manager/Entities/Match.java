@@ -16,19 +16,22 @@ public class Match {
     private Long id;
     private LocalDate matchDate;
     private int scoreHome, scoreAway;
-
+    private int roundNumber;
     // Association 1 Many matches to one team  X 2 (home & away)
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="hometeam_id")
-    @JsonIgnore
     private Team hometeam;
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="awayteam_id")
-    @JsonIgnore
     private Team awayteam;
 
     // Association 2  one Match	to many PlayerMatchStat
     @OneToMany(cascade=CascadeType.ALL, mappedBy="match" , fetch=FetchType.LAZY)
     private List<PlayerMatchStats> playerMatchStatsList;
+
+    // Associtation 3 many matches to one tournament
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="tourney_id")
+    private Tournament tourney;
 }

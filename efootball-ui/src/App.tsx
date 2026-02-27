@@ -14,7 +14,8 @@ import TournamentsDetails from './components/SaisonComponents/tournamentsDetails
 import CreateTeamForm from './components/forms/createTeam';
 import CreateSaisonForm from './components/forms/createSaison';
 import TeamsDetails from './components/SaisonComponents/teamsDetails';
-import CreatePlayerForm from './components/forms/CreatePlayer';
+import CreatePlayerForm from './components/forms/createPlayer';
+import TournamentBracket from './components/SaisonComponents/Brackets/tournamentBracket';
 
 // import Header from './components/Header';
 // import Tournament from './components/Tournament';
@@ -80,6 +81,7 @@ function App() {
               <Route path="/createTeam/:id" element={<CreateTeamForm />} />
               <Route path="/teamsDetails/:id" element={<TeamsDetails />} />
               <Route path="/createPlayer/:id" element={<CreatePlayerForm />} />
+              {/* <Route path="/tournamentBracket/:id" element={<TournamentBracket id={0} />} /> */}
             </Routes>
           </div>)}
 
