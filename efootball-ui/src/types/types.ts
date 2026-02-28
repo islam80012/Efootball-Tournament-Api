@@ -161,6 +161,11 @@ export interface MatchResponse {
 
     };
 }
+export interface GeneratedMatch {
+    homeTeam: Team;
+    awayTeam: Team;
+    roundNumber: number;
+}
 
 
 

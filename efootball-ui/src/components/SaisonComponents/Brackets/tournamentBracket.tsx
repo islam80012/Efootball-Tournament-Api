@@ -1,46 +1,95 @@
-import { Paper, Typography, Box, Grid } from '@mui/material';
-import type { GeneratedMatch } from './matchGenerator';
+import { useParams } from "react-router-dom";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Container, Typography, Button, Box, Paper } from "@mui/material";
+import matchGenerator from "./matchGenerator";
 
+import {getTournamentByTournamentId, getTeamsByTournamentId,createMatch,} from "../../../api/saisonApi";
+import type { GeneratedMatch, Match } from "../../../types/types";
+import '../../../components/components.css';
 
 interface BracketProps {
-    id: string;
-    matches: GeneratedMatch[];
+  id: string;
+  matches: GeneratedMatch[];
 }
 
-export default function TournamentBracket({ id, matches }: BracketProps) {
-    if (!matches || matches.length === 0) return null;
+export default function TournamentBracketPage() {
+  const { id } = useParams();
+  const queryClient = useQueryClient();
 
-    const matchesByRound = matches.reduce((acc, match) => {
-        const round = match.roundNumber;
-        if (!acc[round]) acc[round] = [];
-        acc[round].push(match);
-        return acc;
-    }, {} as Record<number, GeneratedMatch[]>);
+  const { data: tourneyData } = useQuery({
+    queryKey: ["tourneys", id],
+    queryFn: () => getTournamentByTournamentId(Number(id)),
+  });
 
-    return (
-        <Box sx={{ mt: 4, mb: 4 }}>
-            <Typography variant="h5" gutterBottom>Calendrier du Tournoi (ID: {id})</Typography>
-            
-            {Object.entries(matchesByRound).map(([round, roundMatches]) => (
-                <Paper key={round} elevation={2} sx={{ p: 2, mb: 3, backgroundColor: '#f5f5f5' }}>
-                    <Typography variant="h6" color="primary">Journée {round}</Typography>
-                   <Grid container spacing={2}>
-                {roundMatches.map((match, index) => (
-                    <Grid size={{ xs: 12, md: 6 }} key={index}> 
-                        <Paper sx={{ p: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Typography sx={{ flex: 1, textAlign: 'right', fontWeight: 'bold' }}>
-                                {match.homeTeam.name}
-                            </Typography>
-                            <Typography sx={{ mx: 2, color: 'gray' }}>VS</Typography>
-                            <Typography sx={{ flex: 1, textAlign: 'left', fontWeight: 'bold' }}>
-                                {match.awayTeam.name}
-                            </Typography>
-                        </Paper>
-                    </Grid>
-                ))}
-            </Grid>
-                </Paper>
-            ))}
-        </Box>
-    );
+  const { data: teamsData, isLoading } = useQuery({
+    queryKey: ["teams", id],
+    queryFn: () => getTeamsByTournamentId(Number(id)),
+  });
+
+  const type = (tourneyData?.tourneyType || "LEAGUE") as "LEAGUE" | "UCL";
+  const generatedMatches: GeneratedMatch[] =
+    teamsData && teamsData.length > 1
+      ? matchGenerator(teamsData, type)
+      : [];
+
+  const { mutate: saveAllMatches, isPending } = useMutation({
+    mutationFn: async () => {
+      const baseUrl = "http://localhost:8080/api";
+      const promises = generatedMatches.map((match) => {
+        const payload = {
+          roundNumber: match.roundNumber,
+          matchDate: new Date().toISOString().split("T")[0],
+          scoreHome: 0,
+          scoreAway: 0,
+          tourney: `${baseUrl}/tournaments/${id}`,
+          hometeam: `${baseUrl}/teams/${match.homeTeam.id}`,
+          awayteam: `${baseUrl}/teams/${match.awayTeam.id}`,
+        };
+        return createMatch(payload as unknown as Match);
+      });
+      return Promise.all(promises);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["matches"] });
+      alert("Matches saved successfully!");
+    },
+  });
+
+  if (isLoading) return <Typography>Loading...</Typography>;
+  if (!teamsData || teamsData.length < 2)
+    return <Typography>Not enough teams</Typography>;
+
+  return (
+    <Container sx={{ mt: 4, pb: 5 }}>
+      <Typography variant="h4" gutterBottom className="tournament-details-title">
+        Tournament Calendar
+      </Typography>
+
+      <TournamentDisplay id={id!} matches={generatedMatches} />
+
+      <Button className="save-matches-button" variant="contained" fullWidth disabled={isPending} 
+        onClick={() => saveAllMatches()}
+      >
+        {isPending ? "Saving..." : "Confirm & Save Matches"}
+      </Button>
+      <Button className="back-button" variant="outlined" fullWidth 
+      onClick={() => window.history.back()}>
+        Back to Tournament Details
+      </Button>
+    </Container>
+  );
+}
+
+function TournamentDisplay({ matches }: BracketProps) {
+  return (
+    <Box sx={{ mt: 3 }}>
+      {matches.map((match, index) => (
+        <Paper key={index} sx={{ p: 2, mb: 1, display: 'flex', justifyContent: 'space-between' }}>
+          <Typography>Round {match.roundNumber}: {match.homeTeam.name}</Typography>
+          <Typography sx={{ color: 'gray' }}>vs</Typography>
+          <Typography>{match.awayTeam.name}</Typography>
+        </Paper>
+      ))}
+    </Box>
+  );
 }

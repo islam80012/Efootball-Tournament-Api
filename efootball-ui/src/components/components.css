@@ -2,14 +2,21 @@
  .saison-details-container,
  .tournament-details-container,
  .teams-details-container ,
- .buttons-container{
+ .buttons-container,
+ .tournament-bracket-container{
+    /* margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* align-items: stretch; */ 
     margin-top: 40px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 100%;
 }
 
-.list-title, .saison-details-title,.tournament-list-title ,.tournament-details-title,.Teams-details-title,.team-details-title {
+.list-title,.saison-details-title,.tournament-list-title ,.tournament-details-title,
+.Teams-details-title,.team-details-title,.tournament-details-title{
     text-align: center;
     font-weight: 700 !important;
     letter-spacing: 1px;
@@ -50,7 +57,8 @@
     min-width: 140px;
 }
 
-.saison-dates,.tournament-dates,.tournament-Nteams,.tournament-NplayersPerTeam,.team-name,.team-capacity {
+.saison-dates, .tournament-dates,.tournament-Nteams,
+.tournament-NplayersPerTeam,.team-name,.team-capacity {
     color: #3a3838 !important;
     font-style: italic;
 }
@@ -60,7 +68,8 @@
     color: #2e7d32 !important; 
     text-align: right;
 }
-.add-saison-button, .back-button, .add-tournament-button,.add-player-button,.generate-bracket-button {
+.add-saison-button, .back-button, .add-tournament-button,
+.add-player-button,.generate-bracket-button ,.save-matches-button {
     background-color: #4caf50 !important; 
     color: #ffffff !important;
     font-weight: 600 !important;
@@ -72,4 +81,12 @@
 
 .add-tournament-button, .back-button {
      margin-top:20px !important;
+}
+.tournament-details-container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-height: 100vh;
 }

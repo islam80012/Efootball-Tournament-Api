@@ -1,10 +1,6 @@
 import type {  Team } from '../../../types/types';
 import { shuffleTeams } from '../../../types/functions';
-export interface GeneratedMatch {
-    homeTeam: Team;
-    awayTeam: Team;
-    roundNumber: number;
-}
+import type { GeneratedMatch } from '../../../types/types';
 
 export default function matchGenerator(teams: Team[], type: 'LEAGUE' | 'UCL') : GeneratedMatch[] {
     

@@ -82,6 +82,7 @@ function App() {
               <Route path="/teamsDetails/:id" element={<TeamsDetails />} />
               <Route path="/createPlayer/:id" element={<CreatePlayerForm />} />
               {/* <Route path="/tournamentBracket/:id" element={<TournamentBracket id={0} />} /> */}
+              <Route path="/tournaments/:id/bracket" element={<TournamentBracket/>} />
             </Routes>
           </div>)}
 
