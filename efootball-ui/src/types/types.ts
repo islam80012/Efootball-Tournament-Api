@@ -137,16 +137,17 @@ export interface Match {
     matchDate: string;
     scoreHome: number;
     scoreAway: number;
-    homeTeam?: string;
-    awayTeam?: string;
+    hometeam?: string;
+    awayteam?: string;
     roundNumber: number;
     _links: {
         self: { href: string };
         match: { href: string };
-        homeTeam: { href: string };
-        awayTeam: { href: string };
+        hometeam: { href: string };
+        awayteam: { href: string };
     };
 }
+
 export interface MatchResponse {
     "_embedded": {
         "matches": Match[];
@@ -162,9 +163,12 @@ export interface MatchResponse {
     };
 }
 export interface GeneratedMatch {
-    homeTeam: Team;
-    awayTeam: Team;
+    hometeam: Team;
+    awayteam: Team;
     roundNumber: number;
+}
+export interface MatchWithSide extends Match {
+  isHomeManual: boolean;
 }
 
 

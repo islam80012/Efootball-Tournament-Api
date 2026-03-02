@@ -3,7 +3,9 @@ import { useQuery,useQueries } from '@tanstack/react-query';
 import {Container,Typography, Button} from '@mui/material';
 // import {List, ListItem, ListItemText, Paper } from '@mui/material';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow,Paper } from '@mui/material';
-import { getRegistrationsByTeam,fetchByLink} from '../../api/saisonApi';
+import { getRegistrationsByTeam,fetchByLink,getTeamAwayMatches,getTeamHomeMatches} from '../../api/saisonApi';
+import TeamName from './teamName';
+import type {MatchWithSide,Match} from '../../types/types';
 // import type {Tournament} from '../../types/types'
 ;
 import { useNavigate } from 'react-router-dom';
@@ -15,18 +17,40 @@ export default function TeamsDetails() {
     const navigate = useNavigate();
     const {id} = useParams();
 
+    //Registration data 
     const { data: registrations, isLoading: regLoading ,error: regError} = useQuery({
         queryKey: ['registrations', id],
         queryFn: () => getRegistrationsByTeam(Number(id)),
     });
 
+    //Player data for each registration  
    const playerQueries = useQueries({
         queries: (registrations || []).map((reg: Registration) => ({
             queryKey: ['player', reg._links.player.href],
             queryFn: () => fetchByLink(reg._links.player.href),
         })),
     });
-   const isLoading = regLoading || playerQueries.some(q => q.isLoading);
+
+   //home matches 
+   const homeMatchesQuery = useQuery({
+    queryKey: ['homeMatches', id],
+    queryFn: () => getTeamHomeMatches(Number(id)),
+    });
+
+    //away matches
+    const awayMatchesQuery = useQuery({
+        queryKey: ['awayMatches', id],
+        queryFn: () => getTeamAwayMatches(Number(id)),
+    });
+
+    // contatenate home and away matches
+        const AllMatches: MatchWithSide[] = [
+        ...(homeMatchesQuery.data || []).map((m: Match) => ({ ...m, isHomeManual: true })),
+        ...(awayMatchesQuery.data || []).map((m: Match) => ({ ...m, isHomeManual: false }))
+        ].sort((a, b) => a.roundNumber - b.roundNumber);
+
+    const isLoading = regLoading || playerQueries.some(q => q.isLoading) || 
+        homeMatchesQuery.isLoading || awayMatchesQuery.isLoading;
 
     if (isLoading) return <div>Loading...</div>;
     if (regError) return <div>Error loading registrations:</div>;
@@ -69,6 +93,41 @@ return (
                     Back to Tournament Details
                 </Button>
             </Container>
+            <Typography variant="h4" className="team-details-title" sx={{ mt: 4 }}>Team Matches</Typography>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Round</TableCell>
+                            <TableCell>Home/Away</TableCell>
+                            <TableCell>Opponent</TableCell>
+                            <TableCell>Score</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {AllMatches.map((match, index) => {
+                        const isHome = match.isHomeManual;
+                        const opponentUrl = isHome 
+                       ? match._links?.awayteam?.href 
+                       : match._links?.hometeam?.href;
+
+                        return (
+                        <TableRow key={index}>
+                            <TableCell>{match.roundNumber}</TableCell>
+                            <TableCell>{isHome ? "Home" : "Away"}</TableCell>
+                            <TableCell>
+                            <TeamName url={opponentUrl} />
+                            </TableCell>
+                            <TableCell>{match.scoreHome} - {match.scoreAway}</TableCell>
+                        </TableRow>
+                        );
+                    })}
+                    </TableBody>
+
+                </Table>
+            </TableContainer>
+            
+
         </Container>
     );
 }

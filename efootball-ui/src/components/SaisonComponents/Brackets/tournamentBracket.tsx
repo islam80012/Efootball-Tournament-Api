@@ -42,8 +42,8 @@ export default function TournamentBracketPage() {
           scoreHome: 0,
           scoreAway: 0,
           tourney: `${baseUrl}/tournaments/${id}`,
-          hometeam: `${baseUrl}/teams/${match.homeTeam.id}`,
-          awayteam: `${baseUrl}/teams/${match.awayTeam.id}`,
+          hometeam: `${baseUrl}/teams/${match.hometeam.id}`,
+          awayteam: `${baseUrl}/teams/${match.awayteam.id}`,
         };
         return createMatch(payload as unknown as Match);
       });
@@ -85,9 +85,9 @@ function TournamentDisplay({ matches }: BracketProps) {
     <Box sx={{ mt: 3 }}>
       {matches.map((match, index) => (
         <Paper key={index} sx={{ p: 2, mb: 1, display: 'flex', justifyContent: 'space-between' }}>
-          <Typography>Round {match.roundNumber}: {match.homeTeam.name}</Typography>
+          <Typography>Round {match.roundNumber}: {match.hometeam.name}</Typography>
           <Typography sx={{ color: 'gray' }}>vs</Typography>
-          <Typography>{match.awayTeam.name}</Typography>
+          <Typography>{match.awayteam.name}</Typography>
         </Paper>
       ))}
     </Box>

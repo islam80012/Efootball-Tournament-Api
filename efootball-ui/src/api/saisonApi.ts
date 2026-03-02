@@ -106,6 +106,14 @@ export const createMatch = async (matchData: Omit<Match, 'id' | '_links'>) => {
     const response = await axios.post('http://localhost:8080/api/matches', matchData);
     return response.data;
 }
+export const getTeamAwayMatches = async (teamId: number) => {
+    const response = await axios.get(`http://localhost:8080/api/teams/${teamId}/awaymatches`);
+    return response.data._embedded.matches; 
+}
+export const getTeamHomeMatches = async (teamId: number) => {
+    const response = await axios.get(`http://localhost:8080/api/teams/${teamId}/homematches`);
+    return response.data._embedded.matches; 
+}
 
 
 
