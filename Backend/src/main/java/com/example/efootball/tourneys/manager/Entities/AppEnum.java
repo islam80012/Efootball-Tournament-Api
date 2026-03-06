@@ -14,5 +14,9 @@ public class AppEnum {
     public enum tourneyType {
          UCL,LEAGUE
     }
+    public enum matchetat{
+        Played,NotPlayed,ConfirmationPending,
+
+    }
 
 }

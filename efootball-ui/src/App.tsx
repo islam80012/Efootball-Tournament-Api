@@ -13,7 +13,7 @@ import SaisonDetails from './components/SaisonComponents/saisonDetails';
 import TournamentsDetails from './components/SaisonComponents/tournamentsDetails';
 import CreateTeamForm from './components/forms/createTeam';
 import CreateSaisonForm from './components/forms/createSaison';
-import TeamsDetails from './components/SaisonComponents/teamsDetails';
+import TeamsDetails from './components/SaisonComponents/TeamComponent/teamsDetails';
 import CreatePlayerForm from './components/forms/createPlayer';
 import TournamentBracket from './components/SaisonComponents/Brackets/tournamentBracket';
 

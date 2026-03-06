@@ -8,3 +8,4 @@ export const shuffleTeams = (array: Team[]) => {
     }
     return shuffled;
 }
+

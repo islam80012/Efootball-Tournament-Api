@@ -29,8 +29,8 @@ const generateLeagueMatches = (teamsData: Team[]) => {
             // On n'ajoute que les matchs réels (sans BYE)
             if (home.id !== -1 && away.id !== -1) {
                 allMatches.push({
-                    homeTeam: home,
-                    awayTeam: away,
+                    hometeam: home,
+                    awayteam: away,
                     roundNumber: round + 1,
                 });
             }
@@ -79,8 +79,8 @@ const generateLeagueMatches = (teamsData: Team[]) => {
 
                 if (opponentB) {
                     matches.push({
-                        homeTeam: teamA,
-                        awayTeam: opponentB,
+                        hometeam: teamA,
+                        awayteam: opponentB,
                         roundNumber: round
                     });
                     

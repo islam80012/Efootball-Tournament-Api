@@ -114,6 +114,13 @@ export const getTeamHomeMatches = async (teamId: number) => {
     const response = await axios.get(`http://localhost:8080/api/teams/${teamId}/homematches`);
     return response.data._embedded.matches; 
 }
+export const updateMatchScore = async (matchId: number, scoreHome: number, scoreAway: number) => {
+    const response = await axios.patch(`http://localhost:8080/api/matches/${matchId}`, {
+        scoreHome,  
+        scoreAway
+    });
+    return response.data;
+}
 
 
 

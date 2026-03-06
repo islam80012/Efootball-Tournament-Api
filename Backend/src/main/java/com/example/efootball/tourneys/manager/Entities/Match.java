@@ -14,9 +14,9 @@ public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private LocalDate matchDate;
     private int scoreHome, scoreAway;
     private int roundNumber;
+    private AppEnum.matchetat etat ;
     // Association 1 Many matches to one team  X 2 (home & away)
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="hometeam_id")

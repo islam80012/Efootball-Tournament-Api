@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchByLink } from '../../api/saisonApi';
+import { fetchByLink } from '../../../api/saisonApi';
 import { Typography } from '@mui/material';
 
 interface TeamNameProps {

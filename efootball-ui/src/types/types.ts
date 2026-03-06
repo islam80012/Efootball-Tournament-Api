@@ -134,12 +134,12 @@ export interface RegistrationResponse {
 // Match Types
 export interface Match {
     id: number;
-    matchDate: string;
     scoreHome: number;
     scoreAway: number;
     hometeam?: string;
     awayteam?: string;
     roundNumber: number;
+    matchtype: 'Played' | 'NotPlayed'|'ConfimationPending';
     _links: {
         self: { href: string };
         match: { href: string };
