@@ -70,7 +70,6 @@ function App() {
             <ActionButton variant="contained" >Stats</ActionButton>
           </div>
           {location.pathname !== '/' && (
-          <div className="form-area">
             <Routes>
               <Route path="/createSaison" element={<CreateSaisonForm />} />
               <Route path="/createTournament/:id" element={<CreateTournamentForm />} />
@@ -84,7 +83,7 @@ function App() {
               {/* <Route path="/tournamentBracket/:id" element={<TournamentBracket id={0} />} /> */}
               <Route path="/tournaments/:id/bracket" element={<TournamentBracket/>} />
             </Routes>
-          </div>)}
+          )}
 
         
       </div>

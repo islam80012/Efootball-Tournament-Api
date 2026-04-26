@@ -9,10 +9,16 @@
     flex-direction: column;
     /* align-items: center; */
     /* align-items: stretch; */ 
-    margin-top: 40px;
+    /* margin-top: 40px;
     display: flex;
     flex-direction: column;
+    width: 100%; */
     width: 100%;
+    max-width: 1200px; /* Ou une largeur qui te convient */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    
 }
 
 .list-title,.saison-details-title,.tournament-list-title ,.tournament-details-title,

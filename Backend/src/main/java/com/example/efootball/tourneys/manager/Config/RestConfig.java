@@ -1,6 +1,9 @@
 package com.example.efootball.tourneys.manager.Config;
 
 import com.example.efootball.tourneys.manager.Entities.*;
+import com.example.efootball.tourneys.manager.Services.*;
+import com.example.efootball.tourneys.manager.Listeners.MatchEventHandler;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -16,8 +19,15 @@ public class RestConfig implements RepositoryRestConfigurer {
                 .allowedOrigins("http://localhost:5173")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
 
+
         // show the IDs for React app to use.
-        config.exposeIdsFor(Team.class, Player.class, Registration.class,Saison.class,Tournament.class);
+        config.exposeIdsFor(Team.class, Player.class, Registration.class,Saison.class,Tournament.class,GameDuel.class);
+    }
+
+
+    @Bean
+    MatchEventHandler matchEventHandler(MatchService matchService) {
+        return new MatchEventHandler(matchService);
     }
     
 }

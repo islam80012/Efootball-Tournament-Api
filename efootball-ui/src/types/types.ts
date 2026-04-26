@@ -171,6 +171,26 @@ export interface MatchWithSide extends Match {
   isHomeManual: boolean;
 }
 
-
-
+// GameDuel Types
+export interface GameDuel {
+    id: number;
+    scoreHome:number;
+    scoreAway:number;
+    captainDuel: true | false;
+    _links: {
+        self: { href: string };
+        gameDuel: { href: string };
+        playerAway: { href: string };
+        playerHome: { href: string };
+        match: { href: string };
+    }
+    
+}
+   
+                  
+export interface GameDuelResponse {
+    "_embedded": {
+        "gameDuels": GameDuel[];
+};
+}
     

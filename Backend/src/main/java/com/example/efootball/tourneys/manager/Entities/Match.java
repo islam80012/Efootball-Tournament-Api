@@ -34,4 +34,11 @@ public class Match {
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="tourney_id")
     private Tournament tourney;
+
+    // Associtation 4 one match to many gameduels
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="match" , fetch=FetchType.LAZY)
+    private List<GameDuel> gameDuelList;
+
+
+
 }

@@ -42,7 +42,7 @@ const handleSubmit = (e: React.FormEvent) => {
       maxsTeams: teamsNumber,
       playersPerTeam: playersPerTeam,
       tournamentStartDate: startDate,
-      tourneyType: tourneyType, // Include tourneyType in the mutation
+      tourneyType: tourneyType, 
       status: "OPEN",
       saison: `http://localhost:8080/api/saisons/${id}`
     } as Omit<Tournament, '_links'>

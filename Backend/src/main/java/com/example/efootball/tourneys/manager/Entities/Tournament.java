@@ -25,7 +25,7 @@ public class Tournament {
     private AppEnum.tourneyType tourneyType;
 
     // Association 1 : one Tourney to many teams
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="tourney" , fetch=FetchType.EAGER)
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="tourney" , fetch=FetchType.LAZY)
     @JsonIgnore
     private List<Team> teams= new ArrayList<>();
 
@@ -35,6 +35,6 @@ public class Tournament {
     private Saison saison;
 
     // Association 3 : one Tournament to many matches
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tourney",fetch=FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tourney",fetch=FetchType.LAZY)
     private List<Match> matches= new ArrayList<>();
 }

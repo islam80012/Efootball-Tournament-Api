@@ -97,7 +97,7 @@ export const addPlayerToTeam = async ({ player, teamId, role }: {
     return response.data._embedded.registrations; // This is the array
 };
 
-// ================ Match API functions ================
+// =================== Match API functions ==================
 export const addMatches = async (matches: Match[]) => {
     const response = await axios.post('http://localhost:8080/api/matches', matches);
     return response.data;
@@ -121,6 +121,12 @@ export const updateMatchScore = async (matchId: number, scoreHome: number, score
     });
     return response.data;
 }
+// =============== GameDuel API functions ================
+export const getDuelsByMatch = async (matchId: number) => { 
+    const response = await axios.get(`http://localhost:8080/api/gameDuels/search/findByMatchId?id=${matchId}`);
+    return response.data._embedded.gameDuels; 
+}
+
 
 
 

@@ -69,8 +69,8 @@ public class EffootballTourneyManagementApplication implements CommandLineRunner
 		teamRepo.saveAll(List.of(teamA, teamB));
 
 		//4. Create Player
-		Player player1 = new Player(null,"islam_0015","islamovic",new ArrayList<>(), new ArrayList<>());
-		Player player2 = new Player(null,"wassimAch","messi",new ArrayList<>(), new ArrayList<>());
+		Player player1 = new Player(null,"islam_0015","islamovic",new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+		Player player2 = new Player(null,"wassimAch","messi",new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
 		//5. Adding the two players to registarions
 
