@@ -9,10 +9,6 @@ import type { AxiosError } from 'axios';
 
 import './tournamentForm.css';
 
-
-
-
-
 export default function CreateSaisonForm() {
 
 const [name, setName] = useState('');
@@ -62,6 +58,6 @@ const handleSubmit = (e: React.FormEvent) => {
             </Button>
         </Box>
         
-       
+        
     )
-}   
+}
