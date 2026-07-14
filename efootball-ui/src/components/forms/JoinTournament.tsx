@@ -1,9 +1,8 @@
 import { Box, TextField, Button, Stack } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuItem from '@mui/material/MenuItem';
-import './tournamentForm.css';
+import './FormsStyling.css';
 import { useNavigate } from 'react-router-dom';
-
 export default function JoinTournamentForm() {
   const navigate = useNavigate();
 

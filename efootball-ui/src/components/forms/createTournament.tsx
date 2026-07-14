@@ -7,7 +7,7 @@ import { addTournamentToSaison } from '../../api/saisonApi';
 import type { Tournament } from '../../types/types';
 import type { AxiosError } from 'axios';
 
-import './tournamentForm.css';
+import './FormsStyling.css';
 
 
 export default function CreateTournmentForm() {

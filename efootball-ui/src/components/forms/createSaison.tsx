@@ -7,7 +7,7 @@ import type { Saison } from '../../types/types';
 import { useState } from 'react';
 import type { AxiosError } from 'axios';
 
-import './tournamentForm.css';
+import './FormsStyling.css';
 
 export default function CreateSaisonForm() {
 

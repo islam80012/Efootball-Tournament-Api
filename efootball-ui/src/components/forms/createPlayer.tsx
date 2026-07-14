@@ -5,9 +5,7 @@ import { useMutation, useQueryClient,useQuery } from '@tanstack/react-query';
 import { addPlayerToTeam,getTeamById, getTeamRegistrations } from '../../api/saisonApi';
 // import type { Player } from '../../types/types';
 import { useState } from 'react';
-
-
-import './tournamentForm.css';
+import './FormsStyling.css';
 import type { Registration } from '../../types/types';
 
 export default function CreatePlayerForm() {
