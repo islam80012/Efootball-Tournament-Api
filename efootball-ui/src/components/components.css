@@ -1,98 +1,505 @@
+/* ── Shared page shells ─────────────────────────────────────────────── */
+
 .list-container,
- .saison-details-container,
- .tournament-details-container,
- .teams-details-container ,
- .buttons-container,
- .tournament-bracket-container{
-    /* margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    /* align-items: stretch; */ 
-    /* margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    width: 100%; */
-    width: 100%;
-    max-width: 1200px; /* Ou une largeur qui te convient */
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    
+.saison-details-container,
+.tournament-details-container,
+.teams-details-container,
+.buttons-container,
+.tournament-bracket-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
 }
 
-.list-title,.saison-details-title,.tournament-list-title ,.tournament-details-title,
-.Teams-details-title,.team-details-title,.tournament-details-title{
-    text-align: center;
-    font-weight: 700 !important;
-    letter-spacing: 1px;
-    color: #ffffff; 
-    text-transform: uppercase;
-    margin-bottom: 20px !important;
-}
-
-.saison-list-wrappe,.tournaments-wrappe,.teams-wrapper {
-    background-color: rgba(27, 4, 69, 0.1) !important; 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); 
-    width: 100%;
-    border-radius: 15px !important;
-    overflow: hidden;
-    padding: 10px !important;
-}
-
-.saison-list-item, .saison-details,.tournament-list-item, .tournament-details,.team-list-item {
-    background-color: #ffffff !important;
-    margin-bottom: 8px !important;
-    border-radius: 10px !important;
-    border: none !important; 
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    padding: 15px !important;
-}
-
-.saison-list-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(87, 70, 174, 0.2);
-    background-color: #a1a8b7 !important;
-    cursor: pointer;
-}
-
-.saison-name,.tournament-name,.team-id {
-    font-weight: 800 !important;
-    color: #1a237e !important; 
-    min-width: 140px;
-}
-
-.saison-dates, .tournament-dates,.tournament-Nteams,
-.tournament-NplayersPerTeam,.team-name,.team-capacity {
-    color: #3a3838 !important;
-    font-style: italic;
-}
-
-.saison-status,.tournament-status {
-    font-weight: bold !important;
-    color: #2e7d32 !important; 
-    text-align: right;
-}
-.add-saison-button, .back-button, .add-tournament-button,
-.add-player-button,.generate-bracket-button ,.save-matches-button {
-    background-color: #4caf50 !important; 
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    border-radius: 10px !important;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    margin-right:20px;
-  
-}
-
-.add-tournament-button, .back-button {
-     margin-top:20px !important;
-}
 .tournament-details-container {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  align-items: stretch;
+}
 
-    min-height: 100vh;
+/* ── Section titles ─────────────────────────────────────────────────── */
+
+.list-title,
+.saison-details-title,
+.tournament-list-title,
+.tournament-details-title,
+.Teams-details-title,
+.team-details-title {
+  margin: 0 0 4px !important;
+  text-align: left;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em;
+  color: #f1f5f9 !important;
+  text-transform: none;
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem) !important;
+}
+
+.tournament-list-title,
+.Teams-details-title,
+.team-details-title {
+  margin-top: 8px !important;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Meta / detail lines (saison info block) ────────────────────────── */
+
+.saison-details {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  border-left: 3px solid #22d3ee;
+  color: #cffafe;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.2);
+}
+
+/* ── Glass list wrappers ────────────────────────────────────────────── */
+
+.saison-list-wrapper,
+.tournaments-wrapper,
+.teams-wrapper,
+.saison-list-wrappe,
+.tournaments-wrappe {
+  width: 100% !important;
+  padding: 10px !important;
+  border-radius: 14px !important;
+  overflow: hidden;
+  background: rgba(13, 18, 28, 0.55) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22) !important;
+  color: #e2e8f0;
+}
+
+.teams-wrapper.MuiPaper-root {
+  background-color: transparent !important;
+}
+
+/* ── List rows ──────────────────────────────────────────────────────── */
+
+.saison-list-item,
+.tournament-list-item,
+.team-list-item {
+  background: rgba(255, 255, 255, 0.03) !important;
+  margin-bottom: 8px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 12px 14px !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.saison-list-item:last-child,
+.tournament-list-item:last-child,
+.team-list-item:last-child {
+  margin-bottom: 0 !important;
+}
+
+.saison-list-item:hover,
+.tournament-list-item:hover,
+.team-list-item:hover {
+  background: rgba(34, 211, 238, 0.06) !important;
+  border-color: rgba(34, 211, 238, 0.35) !important;
+  transform: translateY(-1px);
+  cursor: pointer;
+}
+
+/* Inner row layout — wrap on small screens */
+.saison-list-item .MuiBox-root,
+.tournament-list-item .MuiBox-root,
+.team-list-item .MuiBox-root {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px 12px !important;
+  width: 100%;
+}
+
+.saison-list-item .MuiListItemText-root,
+.tournament-list-item .MuiListItemText-root,
+.team-list-item .MuiListItemText-root {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 !important;
+}
+
+/* ── Typography tokens inside lists ─────────────────────────────────── */
+
+.saison-name,
+.tournament-name,
+.team-id {
+  font-weight: 700 !important;
+  color: #f8fafc !important;
+  min-width: 0;
+}
+
+.saison-dates,
+.tournament-dates {
+  color: #67e8f9 !important;
+  font-style: normal !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  text-shadow: 0 0 10px rgba(103, 232, 249, 0.25);
+}
+
+.tournament-Nteams,
+.tournament-NplayersPerTeam {
+  color: #fcd34d !important;
+  font-style: normal !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 10px rgba(252, 211, 77, 0.2);
+}
+
+.team-name {
+  color: #e0f2fe !important;
+  font-style: normal !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+}
+
+.team-capacity {
+  color: #c4b5fd !important;
+  font-style: normal !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+}
+
+.saison-status,
+.tournament-status {
+  font-weight: 700 !important;
+  color: #4ade80 !important;
+  text-align: right;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(74, 222, 128, 0.35);
+}
+
+.tournament-type {
+  color: #22d3ee !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 14px rgba(34, 211, 238, 0.4);
+}
+
+/* ── Tables (teamsDetails) ──────────────────────────────────────────── */
+
+.teams-wrapper .MuiTableHead-root .MuiTableCell-root {
+  background: rgba(255, 255, 255, 0.04);
+  color: #67e8f9 !important;
+  font-weight: 600 !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.teams-wrapper .MuiTableBody-root .MuiTableRow-root {
+  transition: background-color 0.15s ease;
+}
+
+.teams-wrapper .MuiTableBody-root .MuiTableRow-root:hover {
+  background: rgba(34, 211, 238, 0.05);
+}
+
+.teams-wrapper .MuiTableCell-root {
+  color: #e0f2fe !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 10px 12px !important;
+}
+
+.teams-wrapper .MuiTableCell-root.saison-dates {
+  color: #c4b5fd !important;
+}
+
+.teams-wrapper .team-list-item .MuiTableCell-root,
+.teams-wrapper .MuiTableBody-root .MuiTableRow-root.team-list-item {
+  background: transparent !important;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────── */
+
+.add-saison-button,
+.add-tournament-button,
+.add-player-button,
+.generate-bracket-button,
+.save-matches-button,
+.back-button {
+  text-transform: none !important;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+  min-height: 42px;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.add-saison-button,
+.add-tournament-button,
+.add-player-button,
+.generate-bracket-button,
+.save-matches-button {
+  background: rgba(13, 22, 38, 0.85) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(34, 211, 238, 0.45) !important;
+  box-shadow: none !important;
+}
+
+.add-saison-button:hover,
+.add-tournament-button:hover,
+.add-player-button:hover,
+.generate-bracket-button:hover,
+.save-matches-button:hover {
+  background: rgba(34, 211, 238, 0.12) !important;
+  border-color: rgba(34, 211, 238, 0.75) !important;
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.15) !important;
+}
+
+.back-button {
+  background: rgba(34, 211, 238, 0.06) !important;
+  color: #67e8f9 !important;
+  border: 1px solid rgba(34, 211, 238, 0.4) !important;
+  margin-right: 12px;
+}
+
+.back-button:hover {
+  color: #cffafe !important;
+  border-color: rgba(34, 211, 238, 0.85) !important;
+  background: rgba(34, 211, 238, 0.14) !important;
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.2) !important;
+}
+
+.add-tournament-button,
+.back-button {
+  margin-top: 0 !important;
+}
+
+.buttons-container {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.buttons-container .MuiButton-root {
+  flex: 1 1 180px;
+}
+
+/* ── Loading & error ────────────────────────────────────────────────── */
+
+.loading-container,
+.error-container {
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  text-align: center;
+}
+
+.loading-container .MuiTypography-root {
+  color: #94a3b8 !important;
+}
+
+.error-container .MuiTypography-root {
+  color: #f87171 !important;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .list-title,
+  .saison-details-title,
+  .tournament-list-title,
+  .tournament-details-title,
+  .Teams-details-title,
+  .team-details-title {
+    text-align: center;
+  }
+
+  .saison-list-item .MuiListItemText-root,
+  .tournament-list-item .MuiListItemText-root,
+  .team-list-item .MuiListItemText-root {
+    flex: 1 1 100%;
+    text-align: left;
+  }
+
+  .saison-status,
+  .tournament-status {
+    text-align: left;
+  }
+
+  .buttons-container {
+    flex-direction: column;
+  }
+
+  .buttons-container .MuiButton-root {
+    width: 100%;
+    flex: 1 1 auto;
+  }
+
+  .back-button {
+    margin-right: 0;
+  }
+
+  .teams-wrapper {
+    overflow-x: auto;
+  }
+
+  .teams-wrapper .MuiTable-root {
+    min-width: 520px;
+  }
+}
+
+@media (max-width: 480px) {
+  .saison-list-wrapper,
+  .tournaments-wrapper,
+  .teams-wrapper {
+    padding: 8px !important;
+  }
+
+  .saison-list-item,
+  .tournament-list-item,
+  .team-list-item {
+    padding: 10px !important;
+  }
+}
+
+/* ── Tournament bracket / calendar ──────────────────────────────────── */
+
+.tournament-bracket-container {
+  padding-bottom: 24px;
+}
+
+.bracket-subtitle {
+  margin: 0 0 12px !important;
+  color: #67e8f9 !important;
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 10px rgba(103, 232, 249, 0.25);
+}
+
+.bracket-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 8px 0 20px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(13, 18, 28, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
+.bracket-match-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.bracket-match-card:hover {
+  background: rgba(34, 211, 238, 0.06);
+  border-color: rgba(34, 211, 238, 0.35);
+  transform: translateY(-1px);
+}
+
+.bracket-round {
+  flex: 0 0 auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.12);
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  color: #22d3ee !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bracket-matchup {
+  flex: 1 1 220px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  min-width: 0;
+}
+
+.bracket-team {
+  flex: 1 1 120px;
+  min-width: 0;
+  color: #f8fafc !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bracket-team-home {
+  text-align: left;
+}
+
+.bracket-team-away {
+  text-align: right;
+  color: #e0f2fe !important;
+}
+
+.bracket-vs {
+  flex: 0 0 auto;
+  color: #fcd34d !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 12px rgba(252, 211, 77, 0.35);
+}
+
+.bracket-actions {
+  margin-top: 4px;
+}
+
+.bracket-actions .MuiButton-root {
+  flex: 1 1 100%;
+}
+
+@media (max-width: 768px) {
+  .bracket-match-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .bracket-matchup {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .bracket-team,
+  .bracket-team-home,
+  .bracket-team-away {
+    text-align: center;
+    white-space: normal;
+  }
+
+  .bracket-vs {
+    align-self: center;
+  }
 }

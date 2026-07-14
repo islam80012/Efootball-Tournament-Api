@@ -250,7 +250,7 @@ export default function TeamsDetails() {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell style={{ width: '50px' }} /> {/* Pour l'icône expandable */}
+                            {/* <TableCell style={{ width: '50px' }} /> {/* Pour l'icône expandable */} 
                             <TableCell className="saison-name">Round</TableCell>
                             <TableCell className="saison-name">Home team</TableCell>
                             <TableCell className="saison-name" align="center">Score</TableCell>

@@ -51,6 +51,7 @@ export default function MatchRow({ match, onSave, loading }: Props) {
       <TableCell>
         <TextField
           type="number"
+          style={{color: 'white'}}
           value={home}
           onChange={(e) => setHome(e.target.value)}
         />

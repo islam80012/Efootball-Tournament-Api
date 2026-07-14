@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Container, Typography, Button, Box, Paper } from "@mui/material";
+import { Container, Typography, Button, Box } from "@mui/material";
 import matchGenerator from "./matchGenerator";
 
 import {getTournamentByTournamentId, getTeamsByTournamentId,createMatch,} from "../../../api/saisonApi";
@@ -55,40 +55,76 @@ export default function TournamentBracketPage() {
     },
   });
 
-  if (isLoading) return <Typography>Loading...</Typography>;
-  if (!teamsData || teamsData.length < 2)
-    return <Typography>Not enough teams</Typography>;
+  if (isLoading) {
+    return (
+      <Container className="tournament-bracket-container">
+        <Box className="loading-container">
+          <Typography>Loading bracket...</Typography>
+        </Box>
+      </Container>
+    );
+  }
+
+  if (!teamsData || teamsData.length < 2) {
+    return (
+      <Container className="tournament-bracket-container">
+        <Box className="error-container">
+          <Typography>Not enough teams to generate a bracket.</Typography>
+        </Box>
+      </Container>
+    );
+  }
 
   return (
-    <Container sx={{ mt: 4, pb: 5 }}>
-      <Typography variant="h4" gutterBottom className="tournament-details-title">
+    <Container className="tournament-bracket-container">
+      <Typography variant="h4" className="tournament-details-title">
         Tournament Calendar
+      </Typography>
+      <Typography className="bracket-subtitle">
+        {tourneyData?.name} · {generatedMatches.length} matches · {type}
       </Typography>
 
       <TournamentDisplay id={id!} matches={generatedMatches} />
 
-      <Button className="save-matches-button" variant="contained" fullWidth disabled={isPending} 
-        onClick={() => saveAllMatches()}
-      >
-        {isPending ? "Saving..." : "Confirm & Save Matches"}
-      </Button>
-      <Button className="back-button" variant="outlined" fullWidth 
-      onClick={() => window.history.back()}>
-        Back to Tournament Details
-      </Button>
+      <Box className="buttons-container bracket-actions">
+        <Button
+          className="save-matches-button"
+          variant="contained"
+          fullWidth
+          disabled={isPending}
+          onClick={() => saveAllMatches()}
+        >
+          {isPending ? 'Saving...' : 'Confirm & Save Matches'}
+        </Button>
+        <Button className="back-button" variant="outlined" fullWidth onClick={() => window.history.back()}>
+          Back to Tournament Details
+        </Button>
+      </Box>
     </Container>
   );
 }
 
 function TournamentDisplay({ matches }: BracketProps) {
   return (
-    <Box sx={{ mt: 3 }}>
+    <Box className="bracket-list">
       {matches.map((match, index) => (
-        <Paper key={index} sx={{ p: 2, mb: 1, display: 'flex', justifyContent: 'space-between' }}>
-          <Typography>Round {match.roundNumber}: {match.hometeam.name}</Typography>
-          <Typography sx={{ color: 'gray' }}>vs</Typography>
-          <Typography>{match.awayteam.name}</Typography>
-        </Paper>
+        <Box key={`${match.roundNumber}-${match.hometeam.id}-${match.awayteam.id}-${index}`} className="bracket-match-card">
+          <Typography component="span" className="bracket-round">
+            Round {match.roundNumber}
+          </Typography>
+
+          <Box className="bracket-matchup">
+            <Typography component="span" className="bracket-team bracket-team-home">
+              {match.hometeam.name}
+            </Typography>
+            <Typography component="span" className="bracket-vs">
+              VS
+            </Typography>
+            <Typography component="span" className="bracket-team bracket-team-away">
+              {match.awayteam.name}
+            </Typography>
+          </Box>
+        </Box>
       ))}
     </Box>
   );
